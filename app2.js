@@ -77,14 +77,14 @@ function displayBarChart(samples) {
         var barchartsamples = dataSet.samples;
         var result_arr = barchartsamples.filter(samplesobj => samplesobj.id == samples);
         var results = result_arr[0];
-        var otu_id = results.otu_ids.slice(0, 10);
-        var otu_label = results.otu_labels.slice(0, 10);
-        var samples_value = results.sample_values.slice(0, 10);
+        var otu_id = results.otu_ids;
+        var otu_label = results.otu_labels;
+        var samples_value = results.sample_values;
 
         var barchart = [{
-            x: samples_value,
-            y: otu_id,
-            text: otu_label,
+            x: samples_value.slice(0, 10).reverse(),
+            y: otu_id.slice(0, 10).reverse(),
+            text: otu_label.slice(0, 10).reverse(),
             type: "bar",
             marker: {
                 color: "#1978B5"
@@ -97,12 +97,10 @@ function displayBarChart(samples) {
         var layout = {
             title: "Top 10 Microbes (OTUs) Found",
             showlegend: false,
-            height: 600,
-            width: 400,
+            margin: { t: 30, l: 150 }
+            // height: 600,
+            // width: 400,
             
-        yaxis: {
-          autorange: "reversed" 
-        }
     };
     
     Plotly.newPlot("bar", data, layout);
